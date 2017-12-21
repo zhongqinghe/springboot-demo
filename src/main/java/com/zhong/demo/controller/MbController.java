@@ -1,14 +1,15 @@
 package com.zhong.demo.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.nio.channels.FileChannel;
-
-@RestController
-public class HelloController {
+@Controller
+@RequestMapping("/mb")
+public class MbController {
     @Value("${com.zhong.helloWorld}")
     private String helloWorld;
 
@@ -19,15 +20,15 @@ public class HelloController {
     public void setHelloWorld(String helloWorld) {
         this.helloWorld = helloWorld;
     }
-
     @RequestMapping("/hello")
-    public String hello(){
-        return helloWorld;
-    }
-
-    @RequestMapping("/hello2")
     public String hello2(ModelMap map){
-        map.addAttribute("contenct",helloWorld);
+        map.addAttribute("content",helloWorld);
         return "hello2";
+    }
+    @RequestMapping("/bye2")
+    @ResponseBody
+    public String bye(ModelMap map){
+        map.addAttribute("content",helloWorld);
+        return "bye2";
     }
 }
